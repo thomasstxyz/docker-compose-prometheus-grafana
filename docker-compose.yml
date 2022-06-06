@@ -1,0 +1,52 @@
+version: '3'
+
+volumes:
+  prometheus-data:
+    driver: local
+  grafana-data:
+    driver: local
+  alertmanager-data:
+    driver: local
+
+services:
+  prometheus:
+    image: prom/prometheus:v2.33.5
+    ports:
+      - "9090:9090"
+    volumes:
+      - "./prometheus:/etc/prometheus"
+      - "./alertmanager:/alertmanager"
+      - "prometheus-data:/prometheus"
+    restart: unless-stopped
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+
+  grafana:
+    image: grafana/grafana-oss:8.4.3
+    ports:
+      - "3000:3000"
+    volumes:
+      - "grafana-data:/var/lib/grafana"
+    restart: unless-stopped
+
+  alertmanager:
+    image: prom/alertmanager:v0.23.0
+    ports:
+      - "9093:9093"
+    volumes:
+      - "./alertmanager:/config"
+      - "alertmanager-data:/data"
+    restart: unless-stopped
+    command: --config.file=/config/alertmanager.yml --log.level=debug
+
+  blackbox-exporter:
+    image: prom/blackbox-exporter:master
+    ports:
+      - "9115:9115"
+    volumes:
+      - "./blackbox-exporter:/config"
+    cap_add:
+      - NET_RAW
+    restart: unless-stopped
+    command:
+      - "--config.file=/config/blackbox.yml"

@@ -1,0 +1,13 @@
+[
+    {
+      "labels": {
+        "job": "node",
+        "team": "devops",
+        "priority": "1",
+        "env": "dev"
+      },
+      "targets": [
+        "somehost:9100"
+      ]
+    }
+]

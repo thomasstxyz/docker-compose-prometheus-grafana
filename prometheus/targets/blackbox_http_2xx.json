@@ -1,0 +1,12 @@
+[
+    {
+      "labels": {
+        "job": "blackbox_http_2xx",
+        "env": "dev"
+      },
+      "targets": [
+        "https://www.fh-burgenland.at/",
+        "https://landscape.cncf.io/"
+      ]
+    }
+]

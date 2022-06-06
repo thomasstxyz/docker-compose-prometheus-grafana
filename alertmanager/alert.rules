@@ -1,0 +1,10 @@
+groups:
+- name: example
+  rules:
+
+  # Alert for any instance that is unreachable for >15 seconds.
+  - alert: InstanceDown
+    expr: up == 0
+    # for: 1s
+    annotations:
+      summary: "InstanceDown {{ $labels.instance }} from {{ $startsAt }} to {{ $endsAt }}"

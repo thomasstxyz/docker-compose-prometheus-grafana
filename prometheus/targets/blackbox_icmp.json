@@ -1,0 +1,13 @@
+[
+    {
+      "labels": {
+        "job": "blackbox_icmp",
+        "env": "dev"
+      },
+      "targets": [
+        "orf.at",
+        "fh-burgenland.at",
+        "127.0.0.1"
+      ]
+    }
+]
